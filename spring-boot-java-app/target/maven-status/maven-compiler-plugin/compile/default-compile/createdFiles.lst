@@ -1,0 +1,15 @@
+com\wecp\services\PersonTxnServiceImpl.class
+com\wecp\SpringBootApp.class
+com\wecp\services\PersonTxnService.class
+com\wecp\dto\PersonSalesDto.class
+com\wecp\config\SecurityConfig.class
+com\wecp\entities\User.class
+com\wecp\entities\PersonTransaction.class
+com\wecp\controller\UserTransactionController.class
+com\wecp\repos\UserRepository.class
+com\wecp\entities\UserTransaction.class
+com\wecp\controller\UserController.class
+com\wecp\controller\PersonTxnController.class
+com\wecp\repos\UserTransactionRepository.class
+com\wecp\entities\TxnType.class
+com\wecp\repos\PersonTxnRepository.class
