@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: USER
+Build-Jdk: 21.0.1
+Implementation-Title: spring-boot-jwt-banking
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.wecp
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/spring-boot-jwt-banking
+Created-By: Maven Integration for Eclipse
+
