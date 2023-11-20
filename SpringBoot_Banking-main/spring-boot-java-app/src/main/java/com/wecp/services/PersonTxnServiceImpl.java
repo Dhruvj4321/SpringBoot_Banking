@@ -11,14 +11,20 @@ import org.springframework.stereotype.Service;
 
 import com.wecp.dto.PersonSalesDto;
 import com.wecp.entities.PersonTransaction;
+import com.wecp.entities.Product;
 import com.wecp.entities.TxnType;
 import com.wecp.repos.PersonTxnRepository;
+import com.wecp.repos.ProductRepository;
 
 @Service
 @Transactional
 public class PersonTxnServiceImpl implements PersonTxnService{
 	@Autowired
 	PersonTxnRepository repository;
+	
+	@Autowired
+	ProductRepository productRepository;
+	
 
 	@Override
 	public PersonTransaction saveOrUpdate(PersonTransaction personTransaction) {
@@ -31,9 +37,30 @@ public class PersonTxnServiceImpl implements PersonTxnService{
 		Objects.requireNonNull(personTransaction.getPersonName());
 		Objects.requireNonNull(personTransaction.getTransactionAmount());
 		Objects.requireNonNull(personTransaction.getTransactionType());
+		Objects.requireNonNull(personTransaction.getProducts());
 		if(TxnType.valueOf(personTransaction.getTransactionType()) == null) {
 			throw new RuntimeException("INVALID_TRANSACTION_TYPE");
 		}
+		
+//		int size = personTransaction.getProducts().size();
+//		
+//		for(int i = 0; i<size; i++)
+//		{
+//			
+//		}
+		
+		for (Product product : personTransaction.getProducts()) {
+            Product existingProduct = productRepository.findByProductId(product.getProductId());
+
+            if (existingProduct == null) {
+                
+                throw new RuntimeException("Product with productId " + product.getProductId() + " not found");
+            } else {
+               
+                product.setId(existingProduct.getId());
+            }
+        }
+		
 		
 		if(personTransaction2 == null) {
 			return repository.save(personTransaction);
@@ -42,6 +69,7 @@ public class PersonTxnServiceImpl implements PersonTxnService{
 			personTransaction2.setPersonName(personTransaction.getPersonName());
 			personTransaction2.setTransactionAmount(personTransaction.getTransactionAmount());
 			personTransaction2.setTransactionType(personTransaction.getTransactionType());
+			personTransaction2.setProducts(personTransaction.getProducts());
 			return repository.save(personTransaction2);
 		}
 	}
